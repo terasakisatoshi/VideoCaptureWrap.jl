@@ -60,7 +60,7 @@ $ git clone https://github.com/terasakisatoshi/VideoCaptureWrap.jl.git
 $ cd VideoCaptureWrap.jl
 $ make
 # Start building ... and running our application .
-# (See demo.jl, videocapture.cpp and src/VideoCaptureWrap.jl to see more details)
+# (See callcxx.jl, videocapture.cpp and src/VideoCaptureWrap.jl to see more details)
 ```
 
 # References
