@@ -74,3 +74,5 @@ $ make
 - [TakekazuKATO/OpenCV.jl](https://github.com/TakekazuKATO/OpenCV.jl)
 - [JuliaImages/ImageInTerminal.jl](https://github.com/JuliaImages/ImageInTerminal.jl)
 - [JuliaImages/ImageCore.jl](https://github.com/JuliaImages/ImageCore.jl)
+- [My gist1](https://gist.github.com/terasakisatoshi/b6a7121cd570f6739992345095b07d62)
+- [My gist2](https://gist.github.com/terasakisatoshi/163ab1fc3ff1adab340d221eae33d218)
