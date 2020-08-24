@@ -3,6 +3,11 @@ uuid = "b7301a73-0da3-40f0-9cc2-11ce514a9bda"
 authors = ["Satoshi Terasaki <terasakisatoshi.math@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+CxxWrap = "1f15a43c-97ca-5a2a-ae31-89f07a497df4"
+ImageCore = "a09fc81d-aa75-5fe9-8630-4744c3626534"
+ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
+
 [compat]
 julia = "1.5"
 
