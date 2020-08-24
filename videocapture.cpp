@@ -1,7 +1,5 @@
 #include <opencv2/opencv.hpp>
 #include "jlcxx/jlcxx.hpp"
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
 
 using namespace jlcxx;
 using namespace cv;

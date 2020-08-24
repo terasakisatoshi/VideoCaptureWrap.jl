@@ -12,10 +12,6 @@ endif
 
 all: run
 
-docker:
-	docker build -t cxxwrap .
-	docker run --rm -it -v ${PWD}:/work -w /work cxxwrap julia -e 'using Pkg; Pkg.instantiate()'
-
 build: *.cpp CMakeLists.txt
 	julia --project=. -e 'using Pkg; Pkg.instantiate()'
 	cmake -S ./ -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=`julia --project=. -e 'using CxxWrap; CxxWrap.prefix_path() |> print'` && \
