@@ -1,3 +1,5 @@
+# demo script
+
 using CxxWrap
 using ImageInTerminal
 using ImageCore

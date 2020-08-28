@@ -4,6 +4,7 @@
 using namespace jlcxx;
 using namespace cv;
 
+// It is not used for our demo. but useful as an yet another example.
 int capture_image(cv::VideoCapture &cap)
 {
   if (!cap.isOpened())
