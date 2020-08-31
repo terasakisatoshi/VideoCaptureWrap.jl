@@ -2,6 +2,7 @@
 
 using CxxWrap
 using ImageInTerminal
+ImageInTerminal.use_24bit()
 using ImageCore
 
 import VideoCaptureWrap
