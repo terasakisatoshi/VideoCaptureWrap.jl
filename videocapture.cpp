@@ -63,19 +63,7 @@ define_videoio_module(Module &mod)
 {
 
   mod.add_type<cv::VideoCapture>("VideoCapture")
-      .constructor<const cv::String &>()
-      .constructor<const cv::String &, int>()
       .constructor<int>()
-      .method("open",
-              [](cv::VideoCapture &instance, const cv::String &filename) {
-                return instance.open(filename);
-              })
-      .method("open", [](cv::VideoCapture &instance,
-                         int index) { return instance.open(index); })
-      .method("open",
-              [](cv::VideoCapture &instance, int cameraNum, int apiPreference) {
-                return instance.open(cameraNum, apiPreference);
-              })
       .method(
           "isOpened",
           [](const cv::VideoCapture &instance) { return instance.isOpened(); })
