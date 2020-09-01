@@ -8,7 +8,7 @@
 - This repository provides an example of how to wrap OpenCV API via [CxxWrap.jl](https://github.com/JuliaInterop/CxxWrap.jl). 
 It also demonstrates a demo that capture image from your Web/USB camera and display its result using [ImageInTerminal.jl](https://github.com/JuliaImages/ImageInTerminal.jl).
 
-- It is tested on Ubuntu 18.04 or Mac(Catalina) with Julia v1.5.0. The latter has the following environment: 
+- It is tested on Ubuntu 18.04 or Mac(Catalina) with `Julia v1.5.1` . The latter has the following environment: 
 
 ```julia
                _
