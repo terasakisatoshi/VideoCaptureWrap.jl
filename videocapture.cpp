@@ -47,7 +47,6 @@ void set_image(jlcxx::ArrayRef<uint8_t> jlimg, cv::VideoCapture cap)
   }
 }
 
-
 double get_capture_width(cv::VideoCapture &cap)
 {
   return cap.get(CAP_PROP_FRAME_WIDTH);
@@ -61,14 +60,35 @@ double get_capture_height(cv::VideoCapture &cap)
 JLCXX_MODULE
 define_videoio_module(Module &mod)
 {
-
+  mod.add_type<cv::Mat>("Mat")
+      .constructor<int, int, int>()
+  mod.set_override_module(mod.julia_module());
   mod.add_type<cv::VideoCapture>("VideoCapture")
       .constructor<int>()
       .method(
           "isOpened",
           [](const cv::VideoCapture &instance) { return instance.isOpened(); })
       .method("release",
-              [](cv::VideoCapture &instance) { return instance.release(); });
+              [](cv::VideoCapture &instance) { return instance.release(); })
+      .method("read",
+              [](cv::VideoCapture &instance) {
+                Mat frame;
+                instance.read(frame);
+                return frame;
+              })
+      .method("read!",
+              [](cv::VideoCapture &instance, cv::Mat &frame) {
+                instance.read(frame);
+                return frame;
+              });
+  mod.unset_override_module();
+
+  mod.method("namedWindow", cv::namedWindow);
+  mod.method("waitKey", cv::waitKey);
+  mod.method("destroyWindow", cv::destroyWindow);
+  mod.method("imshow", [](const cv::String &winname, const cv::Mat &mat) {
+    return cv::imshow(winname, cv::InputArray(mat));
+  });
 
   mod.method("capture_image", capture_image);
   mod.method("get_capture_width", get_capture_width);
