@@ -61,7 +61,7 @@ JLCXX_MODULE
 define_videoio_module(Module &mod)
 {
   mod.add_type<cv::Mat>("Mat")
-      .constructor<int, int, int>()
+      .constructor<int, int, int>();
   mod.set_override_module(mod.julia_module());
   mod.add_type<cv::VideoCapture>("VideoCapture")
       .constructor<int>()
