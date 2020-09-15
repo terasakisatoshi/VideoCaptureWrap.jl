@@ -45,7 +45,7 @@ void set_jlimage(jlcxx::ArrayRef<uint8_t> jlvec, cv::Mat& frame)
   }
 }
 
-// Pass data from C++ to Julia
+// Pass data from Julia to C++
 cv::Mat to_cvimage(jlcxx::ArrayRef<uint8_t> jlimg, int C, int H, int W)
 {
   cv::Mat frame(H, W, CV_8UC(C));
