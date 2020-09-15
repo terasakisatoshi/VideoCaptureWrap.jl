@@ -47,15 +47,22 @@ function gui()
         while true
             VideoCaptureWrap.read!(cap, cvimg)
             VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
-            degree = mod(degree + 1, 360)
+            if Sys.isapple()
+            	# rotate image dynamically does not work on Linux machine
+            	degree = mod(degree + 1, 360)
+            else
+            	# the case system is on Linux
+            	degree = 45
+            end
             rotated = imrotate(colorview(
                         RGB, 
                         normedview(reshape(jlimg, C, H, W))
                     ), 
-                    deg2rad(degree),
+                    degree,
             ) |> channelview |> rawview .|> UInt8
             cvimg_imshow = VideoCaptureWrap.to_cvimage(vec(rotated), size(rotated)...)
             VideoCaptureWrap.imshow("cvwindow", cvimg_imshow)
+            @info "press q to quit"
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 VideoCaptureWrap.destroyWindow("cvwindow")
                 @info "break"
