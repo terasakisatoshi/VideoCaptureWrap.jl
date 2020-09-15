@@ -33,7 +33,7 @@ function cli()
 end
 
 update_degree_mac(degree) = mod(degree + 1, 360)
-update_degree_linux(degree) = degree
+update_degree_linux(degree) = 45
 
 update_degree = @static Sys.isapple() ? update_degree_mac : update_degree_linux
 
