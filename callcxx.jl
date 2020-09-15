@@ -56,6 +56,7 @@ function gui()
             ) |> channelview |> rawview .|> UInt8
             cvimg_imshow = VideoCaptureWrap.to_cvimage(vec(rotated), size(rotated)...)
             VideoCaptureWrap.imshow("cvwindow", cvimg_imshow)
+            @info "press q to quit"
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 VideoCaptureWrap.destroyWindow("cvwindow")
                 @info "break"
