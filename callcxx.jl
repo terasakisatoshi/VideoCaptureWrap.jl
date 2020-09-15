@@ -32,6 +32,11 @@ function cli()
     end
 end
 
+update_degree_mac(degree) = mod(degree + 1, 360)
+update_degree_linux(degree) = degree
+
+update_degree = @static Sys.isapple() ? update_degree_mac : update_degree_linux
+
 function gui()
     cap =  VideoCaptureWrap.VideoCapture(0)
     if VideoCaptureWrap.isOpened(cap)
@@ -44,25 +49,19 @@ function gui()
         cvimg = VideoCaptureWrap.Mat(H, W, CV_8U)
         jlimg = zeros(UInt8, C * H * W)
         degree = 0
+        @info "press q to quit"
         while true
             VideoCaptureWrap.read!(cap, cvimg)
             VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
-            if Sys.isapple()
-            	# rotate image dynamically does not work on Linux machine
-            	degree = mod(degree + 1, 360)
-            else
-            	# the case system is on Linux
-            	degree = 45
-            end
+            degree = update_degree(degree)
             rotated = imrotate(colorview(
                         RGB, 
                         normedview(reshape(jlimg, C, H, W))
                     ), 
-                    degree,
+                    degree |> deg2rad,
             ) |> channelview |> rawview .|> UInt8
             cvimg_imshow = VideoCaptureWrap.to_cvimage(vec(rotated), size(rotated)...)
             VideoCaptureWrap.imshow("cvwindow", cvimg_imshow)
-            @info "press q to quit"
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 VideoCaptureWrap.destroyWindow("cvwindow")
                 @info "break"
