@@ -13,11 +13,19 @@ function cli()
     if VideoCaptureWrap.isOpened(cap)
         W = Int(VideoCaptureWrap.get_capture_width(cap))
         H = Int(VideoCaptureWrap.get_capture_height(cap))
+        C = 3
+        CV_8U = 16
+        cvimg = VideoCaptureWrap.Mat(H, W, CV_8U)
+        jlimg = zeros(UInt8, C * H * W)
         while true
-            jlimg = zeros(UInt8, 3 * H * W)
-            VideoCaptureWrap.set_image!(jlimg, cap)
-            jlimg = reshape(jlimg, 3, H, W)
-            ImageInTerminal.imshow(colorview(RGB, normedview(jlimg)))
+            VideoCaptureWrap.read!(cap, cvimg)
+            VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
+            ImageInTerminal.imshow(
+                colorview(
+                    RGB, 
+                    normedview(reshape(jlimg, C, H, W))
+                )
+            )
         end
         VideoCaptureWrap.release(cap)
     end
@@ -30,11 +38,15 @@ function gui()
         VideoCaptureWrap.namedWindow("cvwindow", WINDOW_AUTOSIZE);
         W = Int(VideoCaptureWrap.get_capture_width(cap))
         H = Int(VideoCaptureWrap.get_capture_height(cap))
+        C = 3
         CV_8U = 16
         cvimg = VideoCaptureWrap.Mat(H, W, CV_8U)
+        jlimg = zeros(UInt8, C * H * W)
         while true
-            cvimg = VideoCaptureWrap.read!(cap, cvimg)
+            VideoCaptureWrap.read!(cap, cvimg)
             VideoCaptureWrap.imshow("cvwindow", cvimg)
+            VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
+
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 VideoCaptureWrap.destroyWindow("cvwindow")
                 @info "break"
