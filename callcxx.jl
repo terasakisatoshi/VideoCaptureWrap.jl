@@ -35,8 +35,8 @@ function gui()
         while true
             cvimg = VideoCaptureWrap.read!(cap, cvimg)
             VideoCaptureWrap.imshow("cvwindow", cvimg)
-            if VideoCaptureWrap.waitKey(1) >= 0
                 VideoCaptureWrap.destroyWindow("cvwindow")
+            if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 break
             end
         end
