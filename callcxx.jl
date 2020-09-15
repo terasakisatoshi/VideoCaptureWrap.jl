@@ -27,16 +27,17 @@ function gui()
     cap =  VideoCaptureWrap.VideoCapture(0)
     if VideoCaptureWrap.isOpened(cap)
         WINDOW_AUTOSIZE = 0x00000001
-        VideoCaptureWrap.namedWindow("cvwindow", WINDOW_AUTOSIZE);
+        VideoCaptureWrap.namedWindow(VideoCaptureWrap.CVString("cvwindow"), WINDOW_AUTOSIZE);
         W = Int(VideoCaptureWrap.get_capture_width(cap))
         H = Int(VideoCaptureWrap.get_capture_height(cap))
         CV_8U = 16
         cvimg = VideoCaptureWrap.Mat(H, W, CV_8U)
         while true
             cvimg = VideoCaptureWrap.read!(cap, cvimg)
-            VideoCaptureWrap.imshow("cvwindow", cvimg)
-                VideoCaptureWrap.destroyWindow("cvwindow")
+            VideoCaptureWrap.imshow(VideoCaptureWrap.CVString("cvwindow"), cvimg)
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
+                VideoCaptureWrap.destroyWindow(VideoCaptureWrap.CVString("cvwindow"))
+                @info "break"
                 break
             end
         end
