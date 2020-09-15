@@ -7,8 +7,14 @@
 
 - We've succeeded to display video frames using OpenCV's API namely `cv::imshow`. Just try:
 
-```
+```console
 $ make gui # or make run gui
+```
+
+- For those who hasitates to install Julia but knows Docker, try `run.sh` script :D
+
+```console
+$ bash run.sh
 ```
 
 # About this repository

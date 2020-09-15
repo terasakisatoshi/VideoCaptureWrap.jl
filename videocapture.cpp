@@ -1,6 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "jlcxx/jlcxx.hpp"
-
+s
 using namespace jlcxx;
 using namespace cv;
 
@@ -62,6 +62,8 @@ define_videoio_module(Module &mod)
 {
   mod.add_type<cv::Mat>("Mat")
       .constructor<int, int, int>();
+  mod.add_type<cv::String>("CVString")
+      .constructor<std::string>();
   mod.set_override_module(mod.julia_module());
   mod.add_type<cv::VideoCapture>("VideoCapture")
       .constructor<int>()

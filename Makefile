@@ -36,5 +36,6 @@ cli: build
 	julia --project=. callcxx.jl cli
 
 clean:
+	rm -rf ${HOME}/.julia/compiled/*/VideoCaptureWrap
 	rm -rf build
 	rm -rf Manifest.toml
