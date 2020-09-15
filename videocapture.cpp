@@ -26,9 +26,9 @@ int capture_image(cv::VideoCapture &cap)
 }
 
 // Pass data from C++ to Julia
-void set_jlimage(jlcxx::ArrayRef<uint8_t> jlimg, cv::Mat& frame)
+void set_jlimage(jlcxx::ArrayRef<uint8_t> jlvec, cv::Mat& frame)
 {
-  cvtColor(frame, frame, COLOR_BGR2RGB);
+  cv::cvtColor(frame, frame, COLOR_BGR2RGB);
   int H = frame.rows;
   int W = frame.cols;
   int idx = 0;
@@ -38,11 +38,31 @@ void set_jlimage(jlcxx::ArrayRef<uint8_t> jlimg, cv::Mat& frame)
     {
       for (int k = 0; k < 3; k++)
       {
-        jlimg[idx] = frame.ptr<cv::Vec3b>(i)[j][k];
+        jlvec[idx] = frame.ptr<cv::Vec3b>(i)[j][k];
         idx++;
       }
     }
   }
+}
+
+// Pass data from C++ to Julia
+cv::Mat to_cvimage(jlcxx::ArrayRef<uint8_t> jlimg, int C, int H, int W)
+{
+  cv::Mat frame(H, W, CV_8UC(C));
+  int idx = 0;
+  for (int j = 0; j < W; j++)
+  {
+    for (int i = 0; i < H; i++)
+    {
+      for (int k = 0; k < 3; k++)
+      {
+        frame.ptr<cv::Vec3b>(i)[j][k]= jlimg[idx];
+        idx++;
+      }
+    }
+  }
+  cv::cvtColor(frame, frame, COLOR_BGR2RGB);
+  return frame;
 }
 
 double get_capture_width(cv::VideoCapture &cap)
@@ -98,6 +118,5 @@ define_videoio_module(Module &mod)
   mod.method("get_capture_width", get_capture_width);
   mod.method("get_capture_height", get_capture_height);
   mod.method("set_jlimage!", set_jlimage);
-
-
+  mod.method("to_cvimage", to_cvimage);
 }
