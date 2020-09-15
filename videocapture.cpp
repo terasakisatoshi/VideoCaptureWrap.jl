@@ -1,6 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "jlcxx/jlcxx.hpp"
-s
+
 using namespace jlcxx;
 using namespace cv;
 
