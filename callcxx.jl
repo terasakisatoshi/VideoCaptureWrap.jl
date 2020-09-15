@@ -4,6 +4,7 @@
 using ArgParse
 using CxxWrap
 using ImageCore
+using ImageTransformations
 
 import VideoCaptureWrap
 
@@ -42,11 +43,19 @@ function gui()
         CV_8U = 16
         cvimg = VideoCaptureWrap.Mat(H, W, CV_8U)
         jlimg = zeros(UInt8, C * H * W)
+        degree = 0
         while true
             VideoCaptureWrap.read!(cap, cvimg)
-            VideoCaptureWrap.imshow("cvwindow", cvimg)
             VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
-
+            degree = mod(degree + 1, 360)
+            rotated = imrotate(colorview(
+                        RGB, 
+                        normedview(reshape(jlimg, C, H, W))
+                    ), 
+                    deg2rad(degree),
+            ) |> channelview |> rawview .|> UInt8
+            cvimg_imshow = VideoCaptureWrap.to_cvimage(vec(rotated), size(rotated)...)
+            VideoCaptureWrap.imshow("cvwindow", cvimg_imshow)
             if VideoCaptureWrap.waitKey(1) & 0xFF == Int32('q')
                 VideoCaptureWrap.destroyWindow("cvwindow")
                 @info "break"
