@@ -1,4 +1,4 @@
-FROM julia:1.5.1
+FROM julia:1.5.2
 
 # Tip1: https://askubuntu.com/questions/342202/failed-to-load-module-canberra-gtk-module-but-already-installed
 

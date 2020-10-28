@@ -1,9 +1,15 @@
 module VideoCaptureWrap
 
-const _ext = @static Sys.isapple() ? "dylib" : "so"
-
 using CxxWrap
-const libvideocapture = joinpath(@__DIR__, "..", "build", "lib", "libvideocapture.$(_ext)")
+using VideoCaptureWrap_jll
+const libvideocapture = VideoCaptureWrap_jll.libvideocapture_path
+
+#= 
+# For those who like to use your shared library
+using Libdl
+const libvideocapture = joinpath("build", "lib", "libvideocapture.$(Libdl.dlext)")
+=#
+
 isfile(libvideocapture) && @wrapmodule(libvideocapture, :define_videoio_module)
 
 function __init__()
