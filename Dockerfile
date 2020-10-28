@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && \
     echo "Done"
 
-RUN julia -e 'using Pkg; Pkg.add(["CxxWrap", "ImageCore", "Images", "ImageInTerminal"]); Pkg.precompile()'
+RUN julia -e 'using Pkg; Pkg.add(["ArgParse", "CxxWrap", "ImageCore", "Images", "ImageInTerminal", "Libdl"]); Pkg.precompile()'
 
 
 ENV LIB_CXXWRAP=./libcxxwrap-julia
