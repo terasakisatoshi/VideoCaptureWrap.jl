@@ -7,7 +7,7 @@
 
 ## v0.5.x
 
-- We've created JLL Library OpenCVQt_jll.jl and VideoCaptureWrap_jll.jl, where
+- We've created JLL Library [OpenCVQt_jll.jl](https://github.com/terasakisatoshi/OpenCVQt_jll.jl) and [VideoCaptureWrap_jll.jl](https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl), where
   - OpenCVQt_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually.
   - VideoCaptureWrap_jll.jl provides shared library named libvideocapture.[so, dll]. It enables us to skip build `videocapture.cpp` manually.
 - Since BinaryBuilder.jl provides compilers for Windows platforms, we can provide/build our `videocapture.cpp` which means our application VideoCaptureWrap.jl runs on your Windows (64 bit system) machine.
@@ -18,19 +18,6 @@ $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/Op
 $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 $ julia --project=. callcxx.jl gui
-```
-
-## v0.4.x
-- We've succeeded to display video frames using OpenCV's API namely `cv::imshow`. Just try:
-
-```console
-$ make gui # or make run gui
-```
-
-- For those who hasitates to install Julia but knows Docker, try `run.sh` script :D
-
-```console
-$ bash run.sh
 ```
 
 # About this repository
