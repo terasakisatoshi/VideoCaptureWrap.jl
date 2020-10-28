@@ -51,20 +51,33 @@ $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 $ julia --project=. callcxx.jl gui
 ```
 
-# Build `videocapture.cpp` from source
+- You can also try:
+
+```console
+$ make run cli
+$ make run gui
+```
+
+Have a fun!
+
+# Appendix
+
+## Build `videocapture.cpp` from source
 
 - Here is a note for those who like to build our application.
 
-## Case1 
+### Case1 
 
-### Install dependencies
+- You can build cpp source files by your self
+
+#### Install dependencies
 
 - Download Julia 1.5 from [here](https://julialang.org/downloads/).
 - Install Make, CMake (to run `make` or `cmake`)
 - Install OpenCV e.g. `brew install opencv`, `apt-get install libopencv-dev` you know what to do.
 - If you are macOS user, install iterm2 to run our application with it.
 
-### Build `libvideocapture`
+#### Build `libvideocapture`
 
 - Clone this repository and run `make build` command.
 
@@ -76,21 +89,61 @@ $ make build
 # (See callcxx.jl, videocapture.cpp and src/VideoCaptureWrap.jl to see more details)
 ```
 
-- open src/VideoCaptureWrap.jl and replace `const libvideocapture` variable like
+- open `src/VideoCaptureWrap.jl` and replace `const libvideocapture` variable with the following code:
 
 ```julia
-const libvideocapture = 
+using Libdl
+const libvideocapture = joinpath("build", "lib", "libvideocapture.$(Libdl.dlext)")
 ```
 
-with
+### Case2 
 
+- By using `BinaryBuilder.jl` you do not have to prepare C++ compiler by your e.g. on your Windows machine.
 
-- You can also try:
+#### Install Dependencies
+
+- Download Julia 1.5 from [here](https://julialang.org/downloads/).
+- Install Docker
+- Install BinaryBuilder.jl via 
 
 ```console
-$ make run cli
-$ make run gui
+$ julia -e 'using Pkg; Pkg.add("BinaryBuilder")'
 ```
+#### Build OpenCV_jll.jl
+
+Just run:
+
+```console
+$ git clone https://github.com/terasakisatoshi/OpenCVBuilder.jl.git
+$ cd OpenCVBuilder/qt
+$ julia build_tarball.jl --verbose --deploy=local
+```
+
+#### Build VideoCaptureWrap_jll.jl
+
+Just run:
+
+```console
+$ git clone https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git
+$ cd VideoCaptureWrap_jll
+$ julia build_tarball.jl --verbose --deploy=local
+```
+
+### Install JLL library
+
+Finally
+
+```console
+$ julia -e 'using Pkg; pkg"add ~/.julia/dev/OpenCV_Jll"'
+$ julia -e 'using Pkg; pkg"add ~/.julia/dev/VideoCaptureWrap_Jll"'
+```
+
+That's it. Try to run
+
+```console
+$ julia --project=. callcxx.jl gui 
+```
+
 
 # References
 
