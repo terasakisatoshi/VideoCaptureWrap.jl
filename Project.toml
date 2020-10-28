@@ -1,7 +1,7 @@
 name = "VideoCaptureWrap"
 uuid = "b7301a73-0da3-40f0-9cc2-11ce514a9bda"
 authors = ["Satoshi Terasaki <terasakisatoshi.math@gmail.com> and contributors"]
-version = "0.5.1"
+version = "0.5.2"
 
 [deps]
 ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
@@ -10,7 +10,7 @@ ImageCore = "a09fc81d-aa75-5fe9-8630-4744c3626534"
 ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
 ImageTransformations = "02fcd773-0e25-5acc-982a-7f6622650795"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-OpenCV_jll = "33b9d88c-85f9-5d73-bd91-4e2b95a9aa0b"
+OpenCVQt_jll = "2e4a2372-4a7c-5bb9-ae2d-b1938f154ce2"
 VideoCaptureWrap_jll = "b69a920f-0f27-5c26-a11f-67bef8892cc7"
 
 [compat]

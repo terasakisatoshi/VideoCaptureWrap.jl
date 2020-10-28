@@ -27,7 +27,7 @@ build: deps
 	cmake --build ./build --config Release -j ${NPROCS}
 
 install: 
-	julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCV_jll.jl.git"'
+	julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
 	julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
 	julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 
@@ -41,7 +41,7 @@ cli: install
 	julia --project=. callcxx.jl cli
 
 clean:
-	julia -e 'using Pkg; Pkg.rm(["OpenCV_jll", "VideoCaptureWrap_jll"])'
+	julia --project=. -e 'using Pkg; Pkg.rm(["OpenCVQt_jll", "VideoCaptureWrap_jll"])'
 	rm -rf ${HOME}/.julia/compiled/v1.5/VideoCaptureWrap
 	rm -rf build
 	rm -rf Manifest.toml
