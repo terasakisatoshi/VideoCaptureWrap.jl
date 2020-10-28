@@ -7,14 +7,14 @@
 
 ## v0.5.x
 
-- We've created JLL Library OpenCV_jll.jl and VideoCaptureWrap_jll.jl, where
-  - OpenCV_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually.
+- We've created JLL Library OpenCVQt_jll.jl and VideoCaptureWrap_jll.jl, where
+  - OpenCVQt_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually.
   - VideoCaptureWrap_jll.jl provides shared library named libvideocapture.[so, dll]. It enables us to skip build `videocapture.cpp` manually.
 - Since BinaryBuilder.jl provides compilers for Windows platforms, we can provide/build our `videocapture.cpp` which means our application VideoCaptureWrap.jl runs on your Windows (64 bit system) machine.
 - Have a try with the following commands:
 
 ```console
-$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCV_jll.jl.git"'
+$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 $ julia --project=. callcxx.jl gui
@@ -47,7 +47,7 @@ It also demonstrates a demo that capture image from your Web/USB camera and disp
 Just run:
 
 ```console
-$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCV_jll.jl.git"'
+$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 $ julia --project=. callcxx.jl gui
@@ -121,7 +121,7 @@ const libvideocapture = joinpath("build", "lib", "libvideocapture.$(Libdl.dlext)
 ```console
 $ julia -e 'using Pkg; Pkg.add("BinaryBuilder")'
 ```
-#### Build OpenCV_jll.jl
+#### Build OpenCVQt_jll.jl
 
 Just run:
 
