@@ -42,6 +42,8 @@ It also demonstrates a demo that capture image from your Web/USB camera and disp
 
 # Usage
 
+## Case1
+
 Just run:
 
 ```console
@@ -51,6 +53,8 @@ $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 $ julia --project=. callcxx.jl gui
 ```
 
+## Case2
+
 - You can also try:
 
 ```console
@@ -58,7 +62,15 @@ $ make run cli
 $ make run gui
 ```
 
-Have a fun!
+## Case3
+
+- For those who hasitates to install Julia but knows Docker, try `run.sh` script :D
+
+```console
+$ bash run.sh
+```
+
+Enjoy Julia!!!
 
 # Appendix
 

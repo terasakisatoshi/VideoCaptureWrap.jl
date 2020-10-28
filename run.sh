@@ -8,5 +8,5 @@ docker run --rm \
 --device=/dev/video0:/dev/video0 \
 -w /work \
 videocapturewrap \
-make gui # julia --project=/work callcxx.jl gui
+bash -c "make run gui"
 xhost -local:docker
