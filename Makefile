@@ -17,25 +17,31 @@ ifeq (run,$(firstword $(MAKECMDGOALS)))
   $(eval $(RUN_ARGS):;@:)
 endif
 
-.phony: all, build, run, clean, docker, cli, gui
+.phony: all, install, build, run, clean, docker, cli, gui
 
 all: cli
 
-build: *.cpp CMakeLists.txt
-	julia --project=. -e 'using Pkg; Pkg.instantiate()'
-	cmake -S ./ -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=`julia --project=. -e 'using CxxWrap; CxxWrap.prefix_path() |> print'` && \
+build: deps
+	julia --project=deps/src -e 'using Pkg; Pkg.instantiate()'
+	cmake -S ./deps/src -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=`julia --project=deps/src -e 'using CxxWrap; CxxWrap.prefix_path() |> print'` && \
 	cmake --build ./build --config Release -j ${NPROCS}
 
-run: build
+install: 
+	julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCV_jll.jl.git"'
+	julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
+	julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+
+run: install
 	julia --project=. callcxx.jl $(RUN_ARGS)
 
-gui: build
+gui: install
 	julia --project=. callcxx.jl gui
 
-cli: build
+cli: install
 	julia --project=. callcxx.jl cli
 
 clean:
+	julia -e 'using Pkg; Pkg.rm(["OpenCV_jll", "VideoCaptureWrap_jll"])'
 	rm -rf ${HOME}/.julia/compiled/v1.5/VideoCaptureWrap
 	rm -rf build
 	rm -rf Manifest.toml
