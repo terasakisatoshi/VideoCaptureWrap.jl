@@ -114,7 +114,7 @@ Just run:
 
 ```console
 $ git clone https://github.com/terasakisatoshi/OpenCVBuilder.jl.git
-$ cd OpenCVBuilder/qt
+$ cd OpenCVBuilder.jl/qt
 $ julia build_tarball.jl --verbose --deploy=local
 ```
 
@@ -123,8 +123,8 @@ $ julia build_tarball.jl --verbose --deploy=local
 Just run:
 
 ```console
-$ git clone https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git
-$ cd VideoCaptureWrap_jll
+$ git clone https://github.com/terasakisatoshi/VideoCaptureWrapBuilder.jl.git
+$ cd VideoCaptureWrapBuilder.jl
 $ julia build_tarball.jl --verbose --deploy=local
 ```
 
