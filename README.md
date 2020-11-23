@@ -36,6 +36,7 @@ It also demonstrates a demo that capture image from your Web/USB camera and disp
 Just run:
 
 ```console
+$ julia --project=. -e 'using Pkg; Pkg.add(PackageSpec(name="libcxxwrap_julia_jll", rev="libcxxwrap_julia-v0.8.4+0"))'
 $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
 $ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
