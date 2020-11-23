@@ -11,13 +11,15 @@
   - OpenCVQt_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually.
   - VideoCaptureWrap_jll.jl provides shared library named libvideocapture.[so, dll]. It enables us to skip build `videocapture.cpp` manually.
 - Since BinaryBuilder.jl provides compilers for Windows platforms, we can provide/build our `videocapture.cpp` which means our application VideoCaptureWrap.jl runs on your Windows (64 bit system) machine.
-- Have a try with the following commands:
+
+- Copy the following commands on your terminal to test out our package.
 
 ```console
-$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
-$ julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
-$ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
-$ julia --project=. callcxx.jl gui
+julia --project=. -e 'using Pkg; Pkg.add(PackageSpec(name="libcxxwrap_julia_jll", rev="libcxxwrap_julia-v0.8.4+0"))'
+julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/OpenCVQt_jll.jl.git"'
+julia --project=. -e 'using Pkg; pkg"add https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl.git"'
+julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+julia --project=. callcxx.jl gui
 ```
 
 # About this repository
@@ -25,7 +27,7 @@ $ julia --project=. callcxx.jl gui
 - This repository provides an example of how to wrap OpenCV API via [CxxWrap.jl](https://github.com/JuliaInterop/CxxWrap.jl).
 It also demonstrates a demo that capture image from your Web/USB camera and display its result using [ImageInTerminal.jl](https://github.com/JuliaImages/ImageInTerminal.jl) or OpenCV's API.
 
-- It is tested on Ubuntu 18.04, macOS (Catalina) and Windows (64-bit system) (with `Julia v1.5.2`. 
+- It is tested on Ubuntu 18.04, macOS (Catalina), Windows (64-bit system) and Raspberry Pi4 (with `Julia v1.5.3`). 
 
 # Usage
 
