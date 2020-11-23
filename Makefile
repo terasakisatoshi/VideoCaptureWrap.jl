@@ -42,7 +42,7 @@ cli: install
 	julia --project=. callcxx.jl cli
 
 clean:
-	julia --project=. -e 'using Pkg; Pkg.rm(["OpenCVQt_jll", "VideoCaptureWrap_jll"])'
+	julia --project=. -e 'using Pkg; Pkg.rm(["libcxxwrap_julia_jll", "OpenCVQt_jll", "VideoCaptureWrap_jll"])'
 	rm -rf ${HOME}/.julia/compiled/v1.5/VideoCaptureWrap
 	rm -rf build
 	rm -rf Manifest.toml
