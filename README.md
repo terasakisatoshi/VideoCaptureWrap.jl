@@ -29,6 +29,8 @@ It also demonstrates a demo that capture image from your Web/USB camera and disp
 
 - It is tested on Ubuntu 18.04 (64-bit system), macOS (Catalina), Windows (64-bit system) , Jetson nano (aarch64) and Raspberry Pi4 (armv7l) with `Julia v1.5.3`. 
 
+- See also [package announcement](https://discourse.julialang.org/t/ann-videocapturewrap-jl/45491)
+
 # Usage
 
 ## Case1
