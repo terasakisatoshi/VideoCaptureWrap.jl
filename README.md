@@ -8,8 +8,8 @@
 ## v0.5.x
 
 - We've created JLL Library [OpenCVQt_jll.jl](https://github.com/terasakisatoshi/OpenCVQt_jll.jl) and [VideoCaptureWrap_jll.jl](https://github.com/terasakisatoshi/VideoCaptureWrap_jll.jl), where
-  - OpenCVQt_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually.
-  - VideoCaptureWrap_jll.jl provides shared library named libvideocapture.[so, dll]. It enables us to skip build `videocapture.cpp` manually.
+  - OpenCVQt_jll.jl provides OpenCV shared library. It enables us skip installation of OpenCV manually. See [OpenCVBuilder.jl](https://github.com/terasakisatoshi/OpenCVBuilder.jl/blob/main/qt/build_tarball.jl)
+  - VideoCaptureWrap_jll.jl provides shared library named libvideocapture.[so, dll]. It enables us to skip build `videocapture.cpp` manually. See [VideoCaptureWrapBuilder.jl](https://github.com/terasakisatoshi/VideoCaptureWrapBuilder.jl)
 - Since BinaryBuilder.jl provides compilers for Windows platforms, we can provide/build our `videocapture.cpp` which means our application VideoCaptureWrap.jl runs on your Windows (64 bit system) machine.
 
 - Copy the following commands on your terminal to test out our package.
