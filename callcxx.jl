@@ -20,7 +20,7 @@ function cli()
         jlimg = zeros(UInt8, C * H * W)
         while true
             VideoCaptureWrap.read!(cap, cvimg)
-            VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
+            VideoCaptureWrap.set_jlvec!(jlimg, cvimg)
             ImageInTerminal.imshow(
                 colorview(
                     RGB, 
@@ -52,7 +52,7 @@ function gui()
         @info "press q to quit"
         while true
             VideoCaptureWrap.read!(cap, cvimg)
-            VideoCaptureWrap.set_jlimage!(jlimg, cvimg)
+            VideoCaptureWrap.set_jlvec!(jlimg, cvimg)
             degree = update_degree(degree)
             rotated = imrotate(colorview(
                         RGB, 
